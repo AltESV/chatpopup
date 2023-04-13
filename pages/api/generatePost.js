@@ -8,7 +8,7 @@ export default async function handler(req, res) {
   const openai = new OpenAIApi(config);
 
   //fetch faq data
-  const googleKey = process.env.NEXT_PUBLIC_GOOGLE_API_KEY;
+  const googleKey = process.env.GOOGLE_API_KEY;
   const response1 = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/1A79Unz4DfHwPeLPuDHYytOTHHSm9fzAdHumJrTao2tM/values/Sheet1!A:B?key=${googleKey}`);
   const faqData = await response1.json();
   // create an object that maps questions to answers
