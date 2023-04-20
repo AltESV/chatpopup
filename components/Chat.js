@@ -28,6 +28,7 @@ function Chat() {
     console.log(json)
     setAnswer(json.chat)
     setLoading(false)
+    setPrompt("")
   }
 
   const handleClick = () => {
@@ -45,6 +46,9 @@ function Chat() {
       </Fab>
 
       {showModal && <Card sx={{ minWidth: 320 }} className='max-w-xs fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
+      <CardActions>
+          <Button size="small" onClick={handleClose}>Close</Button>
+        </CardActions>
         <CardContent>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
             Chat with our AI Helpers
@@ -57,9 +61,7 @@ function Chat() {
             handleSubmit={handleSubmit}
           />
         </CardContent>
-        <CardActions>
-          <Button size="small" onClick={handleClose}>Close</Button>
-        </CardActions>
+        
       </Card>}
 
     </div>
