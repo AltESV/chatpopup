@@ -12,34 +12,55 @@ import Bot from './Bot'
 
 
 function Chat() {
-    const [showModal, setShowModal] = useState(false)
+  const [showModal, setShowModal] = useState(false);
+  const [prompt, setPrompt] = useState('');
+  const [answer, setAnswer] = useState('');
+  const [loading, setLoading] = useState(false);
 
-    
-const handleClick = () => {
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+    setLoading(true)
+    const response = await fetch(`/api/generatePost`, {
+      method: 'POST',
+      body: JSON.stringify({ prompt: prompt })
+    });
+    const json = await response.json();
+    console.log(json)
+    setAnswer(json.chat)
+    setLoading(false)
+  }
+
+  const handleClick = () => {
     setShowModal(true)
-}
+  }
 
-const handleClose = () => {
+  const handleClose = () => {
     setShowModal(false);
   };
 
   return (
-    <div >
-        <Fab color="primary" aria-label="chat" style={{ position: 'fixed', bottom: '10px', right: '10px' }} onClick={handleClick}>
-            <ChatBubbleIcon  />
-        </Fab>
+    <div>
+      <Fab color="primary" aria-label="chat" style={{ position: 'fixed', bottom: '10px', right: '10px' }} onClick={handleClick}>
+        <ChatBubbleIcon  />
+      </Fab>
 
-        {showModal && <Card sx={{ minWidth: 320 }} className='max-w-xs fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
-      <CardContent>
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          Chat with our AI Helpers
-        </Typography>
-        <Bot/>
-      </CardContent>
-      <CardActions>
-        <Button size="small" onClick={handleClose}>Close</Button>
-      </CardActions>
-    </Card>}
+      {showModal && <Card sx={{ minWidth: 320 }} className='max-w-xs fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
+        <CardContent>
+          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+            Chat with our AI Helpers
+          </Typography>
+          <Bot
+            prompt={prompt}
+            setPrompt={setPrompt}
+            answer={answer}
+            loading={loading}
+            handleSubmit={handleSubmit}
+          />
+        </CardContent>
+        <CardActions>
+          <Button size="small" onClick={handleClose}>Close</Button>
+        </CardActions>
+      </Card>}
 
     </div>
   )
