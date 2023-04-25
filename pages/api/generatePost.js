@@ -1,6 +1,9 @@
 import { Configuration, OpenAIApi } from 'openai'
+import clientPromise from '@/lib/mongodb';
 
 export default async function handler(req, res) {
+  const client = await clientPromise;
+  const db = client.db("chatbot")
   const { prompt } = JSON.parse(req.body);
   const config = new Configuration({
     apiKey: process.env.OPENAI_API_KEY
@@ -35,8 +38,16 @@ export default async function handler(req, res) {
     ],
   });
 
-  console.log(response);
-  console.log(faqData);
+  // console.log(response);
+  // console.log(faqData);
+
+  const parsed = response.data.choices[0]?.message?.content
+
+  const post = await db.collection("chatbot").insertOne({
+    chat: parsed,
+    created: new Date()
+  })
+
 
   res.status(200).json({ chat: response.data.choices[0]?.message?.content })
 }

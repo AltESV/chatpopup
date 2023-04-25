@@ -28,10 +28,11 @@ function Chat() {
     console.log(json)
     setAnswer(json.chat)
     setLoading(false)
+    setPrompt("")
   }
 
   const handleClick = () => {
-    setShowModal(true)
+    showModal ? setShowModal(false) : setShowModal(true)
   }
 
   const handleClose = () => {
@@ -40,11 +41,21 @@ function Chat() {
 
   return (
     <div>
-      <Fab color="primary" aria-label="chat" style={{ position: 'fixed', bottom: '10px', right: '10px' }} onClick={handleClick}>
-        <ChatBubbleIcon  />
+      <Fab 
+        variant='extended' 
+        color="primary" 
+        aria-label="chat" 
+        style={{ position: 'fixed', bottom: '10px', right: '10px', fontWeight: "bold" }} 
+        onClick={handleClick}>
+        {/* <ChatBubbleIcon  /> */}
+        {/* can choose between either text or chat bubble icon if chat bubble icon remove the above variant='extended' tag */}
+        Chat with Troy
       </Fab>
 
       {showModal && <Card sx={{ minWidth: 320 }} className='max-w-xs fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
+      <CardActions>
+          <Button size="small" onClick={handleClose}>Close</Button>
+        </CardActions>
         <CardContent>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
             Chat with our AI Helpers
@@ -57,9 +68,7 @@ function Chat() {
             handleSubmit={handleSubmit}
           />
         </CardContent>
-        <CardActions>
-          <Button size="small" onClick={handleClose}>Close</Button>
-        </CardActions>
+        
       </Card>}
 
     </div>
