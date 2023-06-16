@@ -4,7 +4,7 @@
 ![GitHub issues](https://img.shields.io/github/issues/your-username/your-repo)
 ![GitHub stars](https://img.shields.io/github/stars/your-username/your-repo)
 
-Chatxt is a web application that provides an AI-powered chatbot interface. It allows users to interact with the chatbot and receive responses in real-time. The application is built using Next.js and incorporates various technologies such as Tailwind CSS and MUI (Material-UI).
+My app is a web application that provides an AI-powered chatbot interface. It allows users to interact with the chatbot and receive responses in real-time. The application is built using Next.js and incorporates various technologies such as Tailwind CSS and MUI (Material-UI).
 
 ## Table of Contents
 
@@ -45,7 +45,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## Installation
 
-Follow these steps to set up the Chatxt application:
+Follow these steps to set up the application:
 
 1. Clone the repository to your local machine.
 2. Install the required dependencies by running the following command:
